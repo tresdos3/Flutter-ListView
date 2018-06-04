@@ -45,10 +45,10 @@ class _MyList extends StatelessWidget {
         padding: const EdgeInsets.all(20.0),
         itemBuilder: (context, i){
           return new ListTile(
-            title: new Text('Some Random User', style: new TextStyle(
+            title: new Text('Usuarios Random', style: new TextStyle(
               fontFamily: 'bebas-neue',
             ),),
-            subtitle: new Text('Online', style: new TextStyle(
+            subtitle: new Text('Activo', style: new TextStyle(
               fontFamily: 'bebas-neue',
               fontStyle: FontStyle.italic,
               color: Colors.green
