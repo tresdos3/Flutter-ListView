@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
@@ -33,14 +34,67 @@ class _MyHomePageState extends State<MyHomePage> {
           ),),
         )
       ),
-      body: new Center(
-        child: new Text('Hello World',
-        style: new TextStyle(
-          fontFamily: 'bebas-neue',
-          fontSize: 20.0,
-          color: Colors.red,
-        ),),
-      ),
+      body: new _MyList()
     );
   }
+}
+class _MyList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new ListView.builder(
+        padding: const EdgeInsets.all(20.0),
+        itemBuilder: (context, i){
+          return new ListTile(
+            title: new Text('Some Random User', style: new TextStyle(
+              fontFamily: 'bebas-neue',
+            ),),
+            subtitle: new Text('Online', style: new TextStyle(
+              fontFamily: 'bebas-neue',
+              fontStyle: FontStyle.italic,
+              color: Colors.green
+            )),
+            leading: const Icon(Icons.account_circle),
+            trailing: new RaisedButton(
+                child: new Text('Remove', style: new TextStyle(
+                  fontFamily: 'bebas-neue',
+                )),
+                onPressed: (){
+                  deleteDialog(context).then((value) {
+                    print('Value is $value');
+                  });
+                }),
+          );
+        }
+    );
+  }
+}
+Future<bool> deleteDialog(BuildContext context) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          title: new Text('Are you sure ?', style: new TextStyle(
+            fontFamily: 'bebas-neue',
+          )),
+          actions: <Widget>[
+            new FlatButton(
+                child: new Text('Yes', style: new TextStyle(
+                  fontFamily: 'bebas-neue',
+                )),
+                onPressed: (){
+                  Navigator.of(context).pop(true);
+                }
+            ),
+            new FlatButton(
+                child: new Text('No', style: new TextStyle(
+                  fontFamily: 'bebas-neue',
+                )),
+                onPressed: (){
+                  Navigator.of(context).pop(false);
+                }
+            )
+          ],
+        );
+      }
+  );
 }
